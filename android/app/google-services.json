@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "424531437205",
+    "project_id": "sharedtaxiapp",
+    "storage_bucket": "sharedtaxiapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424531437205:android:9d9b41c68b78a9b4151d9c",
+        "android_client_info": {
+          "package_name": "com.sharedtaxiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424531437205-dqhmg15rlapau3c4l8cqers2h50vp7he.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sharedtaxiapp",
+            "certificate_hash": "104387dc74394375c04e120c1ed005b78fbac694"
+          }
+        },
+        {
+          "client_id": "424531437205-bpjca3bdfdv17vkqbqu5n3ashjeojqbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdF0YGVR3D8wbCvAPcLauBvGGDm0l5piw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424531437205-bpjca3bdfdv17vkqbqu5n3ashjeojqbv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

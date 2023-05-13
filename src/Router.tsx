@@ -6,6 +6,7 @@ import SplashScreen from 'react-native-splash-screen';
 const Stack = createNativeStackNavigator();
 
 import FirstPage from './pages/auth/FirstPage';
+import ConfirmOTP from './pages/auth/ConfirmOTP';
 
 const Router = () => {
 
@@ -15,8 +16,18 @@ const Router = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="FirstPage" screenOptions={{ headerShown:false }}>
+      <Stack.Navigator 
+        initialRouteName="FirstPage" 
+        screenOptions={{ 
+          headerShown:false ,
+          headerStyle:{
+            backgroundColor:'black'
+          },
+          headerTintColor:'black'
+        }}
+      >
         <Stack.Screen name="FirstPage" component={FirstPage} />
+        <Stack.Screen name="ConfirmOTP" component={ConfirmOTP} />
       </Stack.Navigator>
     </NavigationContainer>
   );
