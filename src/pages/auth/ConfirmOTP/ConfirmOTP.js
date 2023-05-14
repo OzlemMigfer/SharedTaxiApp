@@ -1,26 +1,20 @@
 import {Text, View, Button, TextInput} from 'react-native';
 import React, {useState} from 'react';
 import styles from './ConfirmOTP.styles';
-import { useRoute } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 
-const ConfirmOTP = () => {
-  const route = useRoute();
+const ConfirmOTP = ({phoneNumber}) => {
+  const [verificationCode, setVerificationCode] = useState('');
 
-  const[otpInput, setOtpInput] = useState('');
-
-  const confirmData = route.params.confirmData;
-
-  console.log(confirmData);
-
-  const submitOtp = async() => {
+  const handleVerification = async () => {
     try {
-      const response = await confirmData.confirm(otpInput);
-      console.log(response);
-
-      alert("Telefon Numaranız Doğrulandı.");
-    } catch (err) {
-      console.log(err);
+      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      await confirmation.confirm(verificationCode);
+      // Doğrulama işlemi başarılıysa, kullanıcıyı uygulamanın ana sayfasına yönlendir
+    } catch (error) {
+      // Doğrulama işlemi başarısızsa, kullanıcıya hata mesajı göster
+      console.log(error);
     }
   };
 
@@ -28,10 +22,11 @@ const ConfirmOTP = () => {
     <View style={styles.container}>
       <Text>ConfirmOTP</Text>
       <TextInput 
+        value={verificationCode}
         placeholder="Doğrulama Kodu" 
-        onChangeText={(value) => setOtpInput(value)}
+        onChangeText={setVerificationCode}
       />
-      <Button title="Gönder" onPress={() => submitOtp()} />
+      <Button title="Gönder" onPress={handleVerification} />
     </View>
   );
 };

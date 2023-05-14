@@ -1,43 +1,31 @@
 import {Text, View, TextInput, Button} from 'react-native';
 import React, {useState} from 'react';
-import auth from '@react-native-firebase/auth';
-import { useNavigation } from '@react-navigation/native';
+import ConfirmOTP from '../ConfirmOTP';
 
 const FirstPage = () => {
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [confirmData, setConfirmData] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [verificationStarted, setVerificationStarted] = useState(false);
 
-  const navigation = useNavigation();
-
-
-  const sendOtp = async () => {
-    try {
-      const mobile = '+90' + mobileNumber;
-      const response = await auth().signInWithPhoneNumber(mobile);
-      setConfirmData(response);
-      console.log(response);
-      alert('Kod gönderildi lütfen kodu giriniz...');
-
-
-      navigation.navigate({
-        name: 'ConfirmOTP',
-        params: {confirmData:confirmData}
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  const handlePhoneAuth = () => {
+    setVerificationStarted(true);
   };
 
+  if (verificationStarted) {
+    return (
+      <ConfirmOTP phoneNumber={phoneNumber} />
+    );
+  }
 
   return (
     <View>
       <Text>FirstPage</Text>
       <View>
         <TextInput
+          value={phoneNumber}
           placeholder="Telefon Numarası"
-          onChangeText={value => setMobileNumber(value)}
+          onChangeText={setPhoneNumber}
         />
-        <Button title="Devam" onPress={() => sendOtp()} />
+        <Button title="Devam" onPress={handlePhoneAuth} />
       </View>
     </View>
   );
