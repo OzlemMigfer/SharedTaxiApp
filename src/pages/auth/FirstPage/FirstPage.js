@@ -89,7 +89,7 @@ const FirstPage = ({navigation}) => {
         style={styles.button_phone}
         title="Devam"
         onPress={handlePhoneAuth}>
-        <Text style={styles.button_continue}>DEVAM</Text>
+        <Text style={styles.button_continue}>Devam</Text>
       </TouchableOpacity>
 
       {/* line */}

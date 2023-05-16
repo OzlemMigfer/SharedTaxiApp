@@ -49,7 +49,9 @@ export default StyleSheet.create({
         alignSelf:'center'
     },
     button_continue:{
-        color:'white'
+        color:'white',
+        fontWeight:'700',
+        fontSize:16
     },
     container_line:{
         

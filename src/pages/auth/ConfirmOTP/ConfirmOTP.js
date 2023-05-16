@@ -1,8 +1,7 @@
-import {Text, View, Button, TextInput} from 'react-native';
+import {Text, View, TouchableOpacity, TextInput} from 'react-native';
 import React, {useState} from 'react';
 import styles from './ConfirmOTP.styles';
 import auth from '@react-native-firebase/auth';
-
 
 const ConfirmOTP = ({phoneNumber}) => {
   const [verificationCode, setVerificationCode] = useState('');
@@ -20,13 +19,20 @@ const ConfirmOTP = ({phoneNumber}) => {
 
   return (
     <View style={styles.container}>
-      <Text>ConfirmOTP</Text>
-      <TextInput 
-        value={verificationCode}
-        placeholder="Doğrulama Kodu" 
-        onChangeText={setVerificationCode}
-      />
-      <Button title="Gönder" onPress={handleVerification} />
+      <View style={styles.body_container}>
+        <Text style={styles.header}>Telefonunuza Gelen Kodu Giriniz</Text>
+        <TextInput
+          style={styles.input}
+          value={verificationCode}
+          placeholder="Doğrulama Kodu"
+          placeholderTextColor="gray"
+          onChangeText={setVerificationCode}
+          keyboardType="phone-pad"
+        />
+        <TouchableOpacity style={styles.button} onPress={handleVerification}>
+          <Text style={styles.button_text}>Gönder</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
