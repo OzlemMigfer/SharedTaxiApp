@@ -81,5 +81,10 @@ export default StyleSheet.create({
         color:'#a39ea3',
         paddingLeft:10,
         paddingRight:10
+    },
+    footer_container:{},
+    google_button:{},
+    google_text:{
+        color:'white'
     }
 });

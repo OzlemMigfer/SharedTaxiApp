@@ -7,6 +7,7 @@ const Stack = createNativeStackNavigator();
 
 import FirstPage from './pages/auth/FirstPage';
 import ConfirmOTP from './pages/auth/ConfirmOTP';
+import HomePage from './pages/user/HomePage';
 
 const Router = () => {
 
@@ -28,6 +29,7 @@ const Router = () => {
       >
         <Stack.Screen name="FirstPage" component={FirstPage} />
         <Stack.Screen name="ConfirmOTP" component={ConfirmOTP} />
+        <Stack.Screen name="HomePage" component={HomePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

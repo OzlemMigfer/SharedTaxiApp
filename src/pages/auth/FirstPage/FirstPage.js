@@ -1,18 +1,56 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {Text, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
 import ConfirmOTP from '../ConfirmOTP';
 import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
 import styles from './FirstPage.styles';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
-const FirstPage = () => {
+const FirstPage = ({navigation}) => {
+  //phone auth
   const [countryCode, setCountryCode] = useState('TR');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationStarted, setVerificationStarted] = useState(false);
+  //google-sign-in
+  const [userGoogle, setUserGoogle] = useState({});
 
+
+  //google-sign-in
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '424531437205-bpjca3bdfdv17vkqbqu5n3ashjeojqbv.apps.googleusercontent.com',
+    });
+  },[]);
+
+  //google-sign-in
+  GoogleSignin.configure({
+    scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+    webClientId:
+      '424531437205-bpjca3bdfdv17vkqbqu5n3ashjeojqbv.apps.googleusercontent.com',
+    offlineAccess: true,
+    hostedDomain: '',
+    forceCodeForRefreshToken: true,
+    accountName: '',
+    iosClientId: '<FROM DEVELOPER CONSOLE>',
+    googleServicePlistPath: '',
+    openIdRealm: '',
+    profileImageSize: 120,
+  });
+
+  //google-sign-in
+  const googleSignIn = async() => {
+    const {idToken} = await GoogleSignin.signIn();
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    navigation.navigate('ConfirmOTP');
+    return auth().signInWithCredential(googleCredential);
+  }
+
+  //phone auth
   const handlePhoneAuth = () => {
     setVerificationStarted(true);
   };
 
+  //phone auth
   if (verificationStarted) {
     const fullPhoneNumber = `+90${phoneNumber}`;
     return <ConfirmOTP phoneNumber={fullPhoneNumber} />;
@@ -66,6 +104,23 @@ const FirstPage = () => {
           </View>
         </View>
       </KeyboardAvoidingView>
+
+      {/* google */}
+      <View style={styles.footer_container}>
+        <TouchableOpacity 
+          style={styles.google_button}
+          onPress={() => 
+            googleSignIn()
+              .then(res => {
+                console.log(res.user);
+                setUserGoogle(res.user);
+              })
+              .catch(error => console.log(error))
+          }
+        >
+          <Text style={styles.google_text}>Google ile Devam Et</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
