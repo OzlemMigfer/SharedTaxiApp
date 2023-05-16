@@ -118,6 +118,7 @@ const FirstPage = ({navigation}) => {
               .catch(error => console.log(error))
           }
         >
+          <Image style={styles.google_image} source={require('../../../components/assets/google.png')} />
           <Text style={styles.google_text}>Google ile Devam Et</Text>
         </TouchableOpacity>
       </View>

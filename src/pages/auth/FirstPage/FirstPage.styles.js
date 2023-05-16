@@ -82,9 +82,37 @@ export default StyleSheet.create({
         paddingLeft:10,
         paddingRight:10
     },
-    footer_container:{},
-    google_button:{},
+    footer_container:{
+        backgroundColor:'black',
+        flexDirection:'row',
+        borderWidth:5,
+        borderRadius:50,
+        borderLeftColor:'#e5473e',
+        borderRightColor:'#4484ec',
+        borderBottomColor:'#f3c12c',
+        borderTopColor:'#44a454',
+        width:250,
+        alignItems:'center',
+        alignSelf:'center',
+        padding:8,
+        marginTop:50
+    },
+    google_button:{
+        flexDirection:'row',
+        alignSelf:'center'
+    },
+    google_image:{
+        flexDirection:'row',
+        width:30,
+        height:30,
+        alignSelf:'center',
+        marginLeft:12
+    },
     google_text:{
-        color:'white'
+        color:'white',
+        alignSelf:'center',
+        marginLeft:12,
+        fontWeight:'800',
+        fontSize:16
     }
 });
