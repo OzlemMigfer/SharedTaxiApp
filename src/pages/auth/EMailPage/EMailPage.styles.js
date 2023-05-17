@@ -25,7 +25,7 @@ export default StyleSheet.create({
     borderColor: '#f3c12c',
     marginBottom: 10,
     paddingLeft: 15,
-    color: 'gray',
+    color: '#d6d6cd',
   },
   footer_container: {
     marginTop: 380,

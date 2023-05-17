@@ -19,7 +19,7 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName="FirstPage" 
+        initialRouteName="EMailPage" 
         screenOptions={{ 
           headerShown:false ,
           headerStyle:{
