@@ -41,7 +41,7 @@ const FirstPage = ({navigation}) => {
   const googleSignIn = async() => {
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    navigation.navigate('ConfirmOTP');
+    navigation.navigate('UserInfo');
     return auth().signInWithCredential(googleCredential);
   }
 

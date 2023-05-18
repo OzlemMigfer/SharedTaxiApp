@@ -14,7 +14,7 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
     alignSelf: 'center',
-    marginBottom: 25,
+    marginBottom: 40,
   },
   input: {
     backgroundColor: 'black',
@@ -28,7 +28,7 @@ export default StyleSheet.create({
     color: '#d6d6cd',
   },
   footer_container: {
-    marginTop: 330,
+    marginTop: 240,
     alignSelf: 'flex-end',
     marginRight: 20,
     flexDirection: 'row',
@@ -60,5 +60,38 @@ export default StyleSheet.create({
     borderBottomColor: 'transparent',
     borderColor: '#3e2ab8',
     marginTop: 20,
+  },
+  phone_container:{
+    marginTop:-10
+  },
+  country_input: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: 50,
+  },
+  country_picker__container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 2.5,
+    borderColor: '#f3c12c',
+    borderRadius: 10,
+    padding: 5,
+    paddingRight: 10,
+    backgroundColor: 'black',
+    marginRight: 1,
+  },
+  country_code_text: {
+    color: 'gray',
+  },
+  phone_input: {
+    borderWidth: 2.5,
+    borderColor: '#f3c12c',
+    borderRadius: 10,
+    padding: 5,
+    width: 200,
+    paddingLeft: 15,
+    backgroundColor: 'black',
+    color: 'gray',
   },
 });
