@@ -3,7 +3,6 @@ import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import styles from './UserInfo.styles';
 import {useNavigation} from '@react-navigation/native';
 import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
-import ConfirmGoogle from '../ConfirmGoogle';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
@@ -15,7 +14,6 @@ const UserInfo = () => {
   //phone auth
   const [countryCode, setCountryCode] = useState('TR');
   const [phoneNo, setPhoneNo] = useState('');
-  // const [verificationStarted, setVerificationStarted] = useState(false);
 
   const navigation = useNavigation();
 
@@ -45,16 +43,6 @@ const UserInfo = () => {
     }
   };
 
-  //phone auth
-  // const handlePhoneAuth = () => {
-  //   setVerificationStarted(true);
-  // };
-
-  // //phone auth
-  // if (verificationStarted) {
-  //   const fullPhoneNumber = `+90${phoneNo}`;
-  //   return <ConfirmGoogle phoneNo={fullPhoneNumber} />;
-  // }
 
   return (
     <View style={styles.container}>

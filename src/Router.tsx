@@ -21,7 +21,7 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName="FirstPage" 
+        initialRouteName="HomePage" 
         screenOptions={{ 
           headerShown:false ,
           headerStyle:{
@@ -32,10 +32,10 @@ const Router = () => {
       >
         <Stack.Screen name="FirstPage" component={FirstPage} />
         <Stack.Screen name="ConfirmOTP" component={ConfirmOTP} />
-        <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="EMailPage" component={EMailPage} />
         <Stack.Screen name="FullNamePage" component={FullNamePage} />
         <Stack.Screen name="UserInfo" component={UserInfo} />
+        <Stack.Screen name="HomePage" component={HomePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
