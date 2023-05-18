@@ -11,7 +11,6 @@ import HomePage from './pages/user/HomePage';
 import EMailPage from './pages/auth/EMailPage';
 import FullNamePage from './pages/auth/FullNamePage';
 import UserInfo from './pages/auth/UserInfo';
-import ConfirmGoogle from './pages/auth/ConfirmGoogle';
 
 const Router = () => {
 
@@ -37,7 +36,6 @@ const Router = () => {
         <Stack.Screen name="EMailPage" component={EMailPage} />
         <Stack.Screen name="FullNamePage" component={FullNamePage} />
         <Stack.Screen name="UserInfo" component={UserInfo} />
-        <Stack.Screen name="ConfirmGoogle" component={ConfirmGoogle} />
       </Stack.Navigator>
     </NavigationContainer>
   );

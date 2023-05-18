@@ -15,7 +15,7 @@ const UserInfo = () => {
   //phone auth
   const [countryCode, setCountryCode] = useState('TR');
   const [phoneNo, setPhoneNo] = useState('');
-  const [verificationStarted, setVerificationStarted] = useState(false);
+  // const [verificationStarted, setVerificationStarted] = useState(false);
 
   const navigation = useNavigation();
 
@@ -36,24 +36,25 @@ const UserInfo = () => {
   //save the user informations
   const saveName = async () => {
     try {
-      const response = await firestore().collection('userInfo').doc(userId).set({ firstName, lastName, phoneNo }, {merge: true});
+      const fullPhoneNumber = `+90${phoneNo}`;
+      const response = await firestore().collection('userInfo').doc(userId).set({ firstName, lastName, fullPhoneNumber }, {merge: true});
       console.log('Bilgiler başarıyla eklendi: ', response);
-      navigation.navigate('ConfirmGoogle');
+      navigation.navigate('HomePage');
     } catch (error) {
       console.error('bilgileri kaydetme hatası: ', error);
     }
   };
 
   //phone auth
-  const handlePhoneAuth = () => {
-    setVerificationStarted(true);
-  };
+  // const handlePhoneAuth = () => {
+  //   setVerificationStarted(true);
+  // };
 
-  //phone auth
-  if (verificationStarted) {
-    const fullPhoneNumber = `+90${phoneNo}`;
-    return <ConfirmGoogle phoneNo={fullPhoneNumber} />;
-  }
+  // //phone auth
+  // if (verificationStarted) {
+  //   const fullPhoneNumber = `+90${phoneNo}`;
+  //   return <ConfirmGoogle phoneNo={fullPhoneNumber} />;
+  // }
 
   return (
     <View style={styles.container}>
@@ -107,7 +108,6 @@ const UserInfo = () => {
           style={styles.button_next} 
           onPress={() => {
             saveName();
-            handlePhoneAuth();
           }}
         >
           <Text style={styles.button_next_text}>İleri</Text>
