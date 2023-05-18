@@ -3,16 +3,57 @@ import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import styles from './UserInfo.styles';
 import {useNavigation} from '@react-navigation/native';
 import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
+import ConfirmOTP from '../ConfirmOTP';
+import firestore from '@react-native-firebase/firestore';
+import {firebase} from '@react-native-firebase/app';
+import auth from '@react-native-firebase/auth';
 
 const UserInfo = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [userId, setUserId] = useState('');
   //phone auth
   const [countryCode, setCountryCode] = useState('TR');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationStarted, setVerificationStarted] = useState(false);
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (!firebase.apps.length) {
+      firebase.initializeApp({});
+    };
+
+    const unsubscribe = auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUserId(user.uid);
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  //save the firstname and lastname
+  const saveName = async () => {
+    try {
+      const response = await firestore().collection('userInfo').doc(userId).set({ firstName, lastName, phoneNumber }, {merge: true});
+      console.log('Bilgiler başarıyla eklendi: ', response);
+      navigation.navigate('ConfirmOTP');
+    } catch (error) {
+      console.error('bilgileri kaydetme hatası: ', error);
+    }
+  };
+
+  //phone auth
+  const handlePhoneAuth = () => {
+    setVerificationStarted(true);
+  };
+
+  //phone auth
+  if (verificationStarted) {
+    const fullPhoneNumber = `+90${phoneNumber}`;
+    return <ConfirmOTP phoneNumber={fullPhoneNumber} />;
+  }
 
   return (
     <View style={styles.container}>
@@ -23,14 +64,16 @@ const UserInfo = () => {
           value={firstName}
           placeholder="Ad"
           placeholderTextColor="gray"
-          onChangeText={setFirstName}></TextInput>
+          onChangeText={setFirstName}
+        ></TextInput>
 
         <TextInput
           style={styles.input}
           value={lastName}
           placeholder="Soyad"
           placeholderTextColor="gray"
-          onChangeText={setLastName}></TextInput>
+          onChangeText={setLastName}
+        ></TextInput>
 
         <View style={styles.phone_container}>
           <View style={styles.country_input}>
@@ -60,7 +103,13 @@ const UserInfo = () => {
       </View>
 
       <View style={styles.footer_container}>
-        <TouchableOpacity style={styles.button_next}>
+        <TouchableOpacity 
+          style={styles.button_next} 
+          onPress={() => {
+            saveName();
+            handlePhoneAuth();
+          }}
+        >
           <Text style={styles.button_next_text}>İleri</Text>
         </TouchableOpacity>
         <View style={styles.triangle}></View>
