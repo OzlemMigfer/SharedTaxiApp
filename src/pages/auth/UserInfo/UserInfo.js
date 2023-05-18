@@ -3,7 +3,7 @@ import {Text, View, TextInput, TouchableOpacity, Image} from 'react-native';
 import styles from './UserInfo.styles';
 import {useNavigation} from '@react-navigation/native';
 import CountryPicker, {DARK_THEME} from 'react-native-country-picker-modal';
-import ConfirmOTP from '../ConfirmOTP';
+import ConfirmGoogle from '../ConfirmGoogle';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
@@ -14,7 +14,7 @@ const UserInfo = () => {
   const [userId, setUserId] = useState('');
   //phone auth
   const [countryCode, setCountryCode] = useState('TR');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
   const [verificationStarted, setVerificationStarted] = useState(false);
 
   const navigation = useNavigation();
@@ -33,12 +33,12 @@ const UserInfo = () => {
     return unsubscribe;
   }, []);
 
-  //save the firstname and lastname
+  //save the user informations
   const saveName = async () => {
     try {
-      const response = await firestore().collection('userInfo').doc(userId).set({ firstName, lastName, phoneNumber }, {merge: true});
+      const response = await firestore().collection('userInfo').doc(userId).set({ firstName, lastName, phoneNo }, {merge: true});
       console.log('Bilgiler başarıyla eklendi: ', response);
-      navigation.navigate('ConfirmOTP');
+      navigation.navigate('ConfirmGoogle');
     } catch (error) {
       console.error('bilgileri kaydetme hatası: ', error);
     }
@@ -51,8 +51,8 @@ const UserInfo = () => {
 
   //phone auth
   if (verificationStarted) {
-    const fullPhoneNumber = `+90${phoneNumber}`;
-    return <ConfirmOTP phoneNumber={fullPhoneNumber} />;
+    const fullPhoneNumber = `+90${phoneNo}`;
+    return <ConfirmGoogle phoneNo={fullPhoneNumber} />;
   }
 
   return (
@@ -92,10 +92,10 @@ const UserInfo = () => {
 
             <TextInput
               style={styles.phone_input}
-              value={phoneNumber}
+              value={phoneNo}
               placeholder="Telefon Numarası"
               placeholderTextColor="gray"
-              onChangeText={text => setPhoneNumber(text)}
+              onChangeText={text => setPhoneNo(text)}
               keyboardType="phone-pad"
             />
           </View>
