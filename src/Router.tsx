@@ -11,6 +11,8 @@ import HomePage from './pages/user/HomePage';
 import EMailPage from './pages/auth/EMailPage';
 import FullNamePage from './pages/auth/FullNamePage';
 import UserInfo from './pages/auth/UserInfo';
+import PassengerPage from './pages/user/PassengerPage';
+import PassengerInfo from './pages/user/PassengerInfo';
 
 const Router = () => {
 
@@ -21,7 +23,7 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName="HomePage" 
+        initialRouteName="PassengerInfo" 
         screenOptions={{ 
           headerShown:false ,
           headerStyle:{
@@ -36,6 +38,8 @@ const Router = () => {
         <Stack.Screen name="FullNamePage" component={FullNamePage} />
         <Stack.Screen name="UserInfo" component={UserInfo} />
         <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Screen name="PassengerPage" component={PassengerPage} />
+        <Stack.Screen name="PassengerInfo" component={PassengerInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

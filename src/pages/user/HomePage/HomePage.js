@@ -3,6 +3,7 @@ import {Text, View, Image, TouchableOpacity} from 'react-native';
 import styles from './HomePage.styles';
 import {Dropdown} from 'react-native-element-dropdown';
 import FastImage from 'react-native-fast-image';
+import {useNavigation} from '@react-navigation/native';
 
 const cityData = [
   {key: '1', value: 'Adana'},
@@ -95,6 +96,8 @@ const HomePage = () => {
   const [selectedTown, setSelectedTown] = useState('');
   const [selectedQuarter, setSelectedQuarter] = useState('');
 
+  const navigation = useNavigation();
+
   useEffect(() => {
     // Etkinleştirilmiş state güncellemesi veya diğer işlemler burada gerçekleştirilebilir
   }, [selectedCity, selectedTown, selectedQuarter]); // selectedValue bağımlılığını ekleyin
@@ -130,7 +133,7 @@ const HomePage = () => {
       </View>
 
       <View style={styles.footer_container}>
-        <TouchableOpacity style={styles.button_next} >
+        <TouchableOpacity style={styles.button_next} onPress={() => navigation.navigate('PassengerPage')} >
           <Text style={styles.button_next_text}>İleri</Text>
         </TouchableOpacity>
         <View style={styles.triangle}></View>
